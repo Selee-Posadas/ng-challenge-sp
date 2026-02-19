@@ -1,4 +1,4 @@
-import { getJobsAction } from "@/actions/get-jobs.actions";
+import { getJobsAction } from "@/actions/get-jobs.action";
 import type { Job } from "@/interfaces/job.interface";
 import { useEffect, useState } from "react";
 
