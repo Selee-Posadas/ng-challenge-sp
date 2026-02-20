@@ -21,7 +21,6 @@ Se implementó una estética **Neo-Brutalista** personalizada, fusionando un est
 
 - **Responsive Design:** Experiencia optimizada tanto para *mobile* como para *desktop*.
 - **Feedback System:** Notificaciones mediante **Sonner** y validaciones de formularios en tiempo real para evitar errores de envío.
-- **Visual Palette:** - 🟪 **Lilac** & 🟦 **Blue** para acentos técnicos.
   - ⬛ **Shadow Brutal:** Sombras duras y bordes definidos (`rounded-xl`).
 
 ---
@@ -54,3 +53,25 @@ El proyecto aplica principios de **Clean Code** y **SOLID** para asegurar la esc
 Clona el repositorio e instala todas las dependencias necesarias:
 ```bash
 npm install
+
+### 2. Configurar variables de entorno
+Es indispensable configurar la URL base de la API. Copia la plantilla y edita los valores:
+
+```bash
+cp .env.template .env
+
+[!IMPORTANT]
+
+Asegúrate de que VITE_API_URL apunte a la dirección correcta proporcionada para el challenge.
+
+### 3. Lanzar la aplicación
+Para iniciar el servidor de desarrollo:
+
+```bash
+npm run dev
+
+
+👤 Author
+Selene Posadas Full Stack Developer & Engineering Student 📅 2026
+
+<p align="center">Desarrollado con ❤️ para el proceso de selección de Nimble Gravity</p>
