@@ -1,49 +1,46 @@
-import { useState } from "react";
-
-import { useJobs } from "./hooks/useJobs";
+import { LoginView } from "./components/auth/LoginView";
+import { CandidateCard } from "./components/candidate/CandidateCard";
+import { JobsList } from "./components/jobs/JobList";
+import { LoadingScreen } from "./components/shared/LoadingScreen";
 import { useCandidate } from "./hooks/useCandidate";
+import { useJobs } from "./hooks/useJobs";
+import { MainLayout } from "./layouts/MainLayout";
 
 export const ChallengeApp = () => {
-  const { candidate, login, authStatus, error } = useCandidate();
+  const { candidate, authStatus, logout } = useCandidate();
   const { jobs } = useJobs();
-  const [emailInput, setEmailInput] = useState("");
+
+  if(authStatus === "checking") return <LoadingScreen/>;
+
+  if(!candidate) return <LoginView/>;
+
+return (
+    <MainLayout>
+
+      <CandidateCard candidate={candidate} onLogout={logout} />
 
 
-  if (authStatus === "checking") return <p>Iniciando terminal...</p>;
+      <section className="mt-8">
+        <div className="flex justify-between items-end mb-8 border-b-4 border-black pb-2">
+          <div>
+            <h2 className="text-4xl font-black uppercase italic tracking-tighter leading-none">
+              Vacantes <span className="text-brutal-lilac">Disponibles</span>
+            </h2>
+            <p className="text-[10px] font-bold text-gray-500 mt-1 uppercase">
+              Recruitment Portal // Secure_Access_Granted
+            </p>
+          </div>
+          
+          <div className="text-right">
+            <span className="font-mono text-xs font-black bg-black text-white px-2 py-1">
+              RESULTS: {jobs.length}
+            </span>
+          </div>
+        </div>
 
 
-  if (!candidate) {
-    return (
-      <div className="p-10">
-        <h1>Ingreso de Candidato</h1>
-        <input 
-          type="email" 
-          value={emailInput}
-          onChange={(e) => setEmailInput(e.target.value)}
-          placeholder="Tu email de registro"
-          className="border p-2 mr-2 text-black"
-        />
-        <button 
-          onClick={() => login(emailInput)}
-          className="bg-blue-500 p-2 rounded"
-        >
-          Validar
-        </button>
-        {error && <p className="text-red-500 mt-2">{error}</p>}
-      </div>
-    );
-  }
-
-
-  return (
-    <div className="p-10">
-      <h1 className="text-2xl font-bold text-lilac-400">
-        Bienvenida, {candidate.firstName} {candidate.lastName}
-      </h1>
-      <p>ID: {candidate.candidateId}</p>
-      
-      <h2 className="mt-8 text-xl">Trabajos disponibles:</h2>
-      <pre>{JSON.stringify(jobs, null, 2)}</pre>
-    </div>
+        <JobsList />
+      </section>
+    </MainLayout>
   );
 };
