@@ -24,11 +24,17 @@ export const CandidateProvider = ({ children }: PropsWithChildren) => {
     useEffect(() => {
         const savedCandidate = localStorage.getItem('candidate');
         if (savedCandidate) {
-            setCandidate(JSON.parse(savedCandidate));
+        try {
+            const parsed = JSON.parse(savedCandidate);
+            setCandidate(parsed);
             setAuthStatus("authenticated");
-        } else {
+        } catch (error) {
+            localStorage.removeItem('candidate');
             setAuthStatus("not-authenticated");
         }
+    } else {
+        setAuthStatus("not-authenticated");
+    }
     }, []);
 
     const handleLogin = async (email: string) => {
