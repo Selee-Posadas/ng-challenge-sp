@@ -3,26 +3,17 @@ import { handleApiError } from "@/utils/handle-error";
 
 interface PostulacionOptions {
   uuid: string;
-  jobId: string;
   candidateId: string;
+  applicationId: string;
+  jobId: string;
   repoUrl: string;
 }
 
-export const postPostulationAction = async ({ 
-  uuid, 
-  jobId, 
-  candidateId, 
-  repoUrl 
-}: PostulacionOptions) => {
+export const postPostulationAction = async (payload: PostulacionOptions) => {
   try {
-    const { data } = await challengeApi.post('/api/candidate/apply-to-job', {
-      uuid,
-      jobId,
-      candidateId,
-      repoUrl
-    });
-    
-    return data; 
+    const { data } = await challengeApi.post('/api/candidate/apply-to-job', payload);
+
+    return data;
   } catch (error) {
     throw handleApiError(error);
   }

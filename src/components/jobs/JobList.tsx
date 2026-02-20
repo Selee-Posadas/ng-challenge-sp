@@ -10,7 +10,7 @@ export const JobsList = () => {
   const { candidate } = useCandidate();
 
   const handleApply = async (jobId: string, url: string) => {
-    if (!candidate || !candidate.uuid || !candidate.candidateId) {
+    if (!candidate ) {
       toast.error("Información de candidato incompleta. Reintenta el login.");
       return;
     }
@@ -19,6 +19,7 @@ export const JobsList = () => {
       await postPostulationAction({
         uuid: candidate.uuid,
         candidateId: candidate.candidateId,
+        applicationId: candidate.applicationId,
         jobId: jobId,
         repoUrl: url
       });
