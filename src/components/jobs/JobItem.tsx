@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { Job } from '@/interfaces/job.interface';
-import { Send } from 'lucide-react';
-import { toast } from 'sonner';
+//import { Send } from 'lucide-react';
+//import { toast } from 'sonner';
 import { Button } from '../ui/button';
 
 interface Props {
